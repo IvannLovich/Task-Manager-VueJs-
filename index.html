@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <link rel="stylesheet" href="css/bootstrap.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>app</title>
+     
+</head>
+
+<body>
+
+    <div id="app" class="container">
+        
+        <h2>Tareas</h2>
+        
+        <ul class="list-group tasks">
+            
+            <li v-for="(task, index) in tasks" class="list-group-item" v-bind:class="{ editing: task.editing, completed: !task.pending}">
+               
+                <a v-on:click="toggleStatus(task)">
+               
+                   <app-icon v-bind:img="task.pending ? 'square-o' : 'check-square-o'" aria-hidden="true"></app-icon>
+               
+                </a>
+                
+                
+                <template v-if="!task.editing">
+                    
+                    
+                    <span class="description">{{ task.description }}</span>
+                    
+                    
+                    
+                    <div>
+                    
+                    <a v-on:click="editTask(task)">
+                       
+                     <app-icon img="pencil-square-o"></app-icon>
+                        
+<!--                     <span class="fa fa-pencil-square-o" aria-hidden="true"></span> -->
+                        
+                    </a>
+                    
+                    <a v-on:click="deleteTask(index)">
+                       
+                       <app-icon img="trash-o"></app-icon>
+                        
+<!--                      <span class="fa fa-trash-o" aria-hidden="true"></span> -->
+                        
+                    </a>
+                    
+                </div>
+                    
+                
+                     
+                </template>
+                
+                
+                <template v-else>
+                    
+                    
+                    <input type="text" class="form-control input-lg" v-model="draft">
+                    
+                    
+                    <div>
+                    
+                    <a v-on:click="updateTask(task)">
+                       
+                       <app-icon img="check"></app-icon>
+                        
+<!--                        <span class="fa fa-check" aria-hidden="true"></span>-->
+                    </a>
+                    
+                    <a v-on:click="discardTask(task)">
+                       
+                       <app-icon img="times"></app-icon>
+                        
+<!--                        <span class="fa fa-times" aria-hidden="true"></span>-->
+                    </a>
+                    
+                
+                    </div>
+                    
+                    
+   
+                    
+                </template>
+                
+                
+    
+                
+                
+                
+                
+            </li>
+            
+            
+      <!--      <li class="list-group-item editing">
+                
+                
+                <a href="#">
+                    
+                    <span class="fa fa-square-o" aria-hidden="true"></span>
+                
+                </a>
+                
+                
+                
+                
+                
+              
+                
+            </li>
+            
+            <li class="list-group-item completed">
+                
+                <a href="#"><span class="fa fa-check-square-o" aria-hidden="true" ></span></a>
+                
+                
+                <span class="description">Crear API</span>
+                
+                <div>
+                    
+                    <a href="#">
+                        <span class="fa fa-pencil-square-o" aria-hidden="true" ></span>
+                    </a>
+                    
+                    <a href="#">
+                        <span class="fa fa-trash-o" aria-hidden="true" ></span>
+                    </a>
+                    
+    
+                </div>
+                
+        
+            </li> -->
+            
+            
+        </ul> 
+        
+        
+        
+        <form v-on:submit.prevent="createTask" class="new-task-form">
+            
+            <input v-model="new_task" type="text" class="form-control">
+            <button class="btn btn-primary">Crear tarea</button>
+            
+        </form>
+        
+        
+        
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://unpkg.com/vue"></script>
+<script src="js/app.js"></script>
+
+
+    
+</body>
+</html>
